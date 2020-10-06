@@ -1,5 +1,5 @@
 # Crypto api
-This my small example of using Crypto Api from windows (wincrypt)
+This my small example of using Crypto Api from windows (wincrypt) on modern `C++`
 
 Task:
 1. Read file

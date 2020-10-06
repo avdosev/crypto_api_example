@@ -7,7 +7,6 @@
 #include "crypto_provider.h"
 
 
-
 const std::string_view suffix = ".crypt";
 
 std::string add_crypto_suffix(std::string path) {
