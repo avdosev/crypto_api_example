@@ -35,6 +35,23 @@ public:
         return raw_key;
     }
 
+    bool import_key(key_type key) {
+        return CryptImportKey(hCryptProv, key.data(), key.size(), hPublicKey, 0, &hKey);
+    }
+
+    std::optional<std::vector<BYTE>> decrypt_data(std::vector<BYTE> raw) {
+        auto crypted_data = std::move(raw);
+        DWORD dwDataLen = crypted_data.size();
+
+        bool encrypted = CryptDecrypt(hKey, 0, TRUE, 0, crypted_data.data(), &dwDataLen);
+
+        if (encrypted) {
+            return crypted_data;
+        } else {
+            return std::nullopt;
+        }
+    }
+
     std::optional<std::vector<BYTE>> encrypt_data(std::vector<BYTE> raw) {
         auto crypted_data = std::move(raw);
         DWORD dwDataLen = crypted_data.size(), dwBuffLen = crypted_data.size();
